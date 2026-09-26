@@ -1,7 +1,7 @@
 {
   "enabled": false,
   "brandSiteUrl": "",
-  "baseShopUrl": "",
+  "baseShopUrl": "https://lifemaxbet.base.shop/",
   "products": {
     "denim-jacket": { "baseItemUrl": "", "confirmed": false },
     "logo-tee": { "baseItemUrl": "", "confirmed": false },

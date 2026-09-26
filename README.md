@@ -10,7 +10,7 @@ Red and black editorial brand site. The original TOP and lookbook stay independe
 - product-tee.html: T-shirt concept
 - product-cap.html: cap concept
 
-Product pages include detail views, an accessible image zoom dialog, and related items. Current imagery is illustrative. No actual BASE shop URL or product mapping has been supplied, so the site does not accept orders and the purchase links remain disabled.
+Product pages include detail views, an accessible image zoom dialog, and related items. Current product imagery is illustrative. The BASE shop exists at <https://lifemaxbet.base.shop/>, but no actual products have been decided or listed, so the brand site does not accept orders and purchase links remain disabled.
 
 ## Assets
 
@@ -26,7 +26,7 @@ The main branch builds a preview with .github/workflows/pages.yml. Only explicit
 
 Use a free official BASE theme for the store. Keep the brand TOP here and add BRAND SITE / LOOKBOOK return links using BASE's navigation settings. No custom BASE template, API credentials, local cart, iframe checkout or database is required.
 
-`commerce.config.json` is the source of the connection settings:
+`commerce.config.json` is the source of the connection settings. The real BASE shop URL is recorded; the integration remains disabled until a production brand-site URL and real BASE product mappings are ready:
 
 - `enabled`: activate only after the BASE store is ready.
 - `brandSiteUrl`: the final HTTPS brand site URL, not GitHub Pages.
@@ -43,13 +43,13 @@ node scripts/build-site.mjs --production
 
 Outputs: `.publish/preview/` and `.publish/production/`. The production output remains a preview while `enabled` is false. Unknown files in an output directory cause the build to stop rather than accidentally including private data. Builds do not deploy or modify BASE.
 
-For production hosting, Cloudflare Pages is a candidate for static hosting: build command `node scripts/build-site.mjs --production`, output directory `.publish/production`. A hosting account, its final URL and the BASE store URL are still required. Only upload the generated output. Do not upload the repository root.
+For production hosting, use a free static host such as Cloudflare Pages: build command `node scripts/build-site.mjs --production`, output directory `.publish/production`. Cloudflare authentication and a production URL are still required. The BASE navigation currently points back to the GitHub Pages preview for BRAND TOP and LOOKBOOK; update both links to the production URL after hosting is ready. Only upload the generated output. Do not upload the repository root.
 
 GitHub Pages [does not permit e-commerce hosting](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits). Keep it as a design preview and move production before enabling sales links. BASE's standard plan has no initial/monthly fee, but sales and payout fees apply. New paid plans, domains and Apps have not been purchased.
 
 ## Before selling
 
-Replace concept photos and names with confirmed products, add real prices and size charts in BASE, then configure payment, shipping and seller information. Enter the actual store URL and confirmed product mappings, choose production hosting, and build the final output. No BASE admin configuration or end-to-end purchase verification has been completed.
+The BASE account is configured with the free SIMPLE theme, a black background, red accents, a high-contrast brand title, and navigation links back to BRAND TOP and LOOKBOOK. No products have been decided or listed. Before selling, add confirmed product photos and details in BASE, complete payment, shipping and seller information, move the brand site to production hosting, update the two temporary BASE navigation URLs, and set confirmed product mappings. No purchase flow has been tested.
 
 Detailed Japanese handoff material, the logo and a product-mapping worksheet are retained locally under `ECサイト構築素材/BASE設定パッケージ/`; the architecture decision is in `ECサイト構築素材/スクラッチとBASEの連携方針.md`.
 
