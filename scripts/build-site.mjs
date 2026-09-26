@@ -89,11 +89,11 @@ for (const page of pages) {
   html = html.replace(/(<a class="text-link" data-base-shop href=")[^"]*("[^>]*>)/g,
     (_, before, after) => `${before}${escape(shopUrl.href)}${after}`);
   if (live) {
-    html = html.replace(/<a class="header-shop" href="[^"]*">BASE STORE <span aria-hidden="true">↗<\/span><\/a>/g,
-      () => `<a class="header-shop" href="${escape(shop.href)}">ONLINE STORE <span aria-hidden="true">↗</span></a>`);
-    html = html.replace('<span>ONLINE STORE — PREVIEW</span><span>オンラインストア準備中</span>',
-      '<span>LIFE IS MAX BET</span><span>公式オンラインストアはBASEへ</span>');
-    html = replaceRegion(html, 'store-panel', `<section class="store-panel" aria-labelledby="store-panel-title"><div><p class="eyebrow">OFFICIAL ONLINE STORE</p><h2 id="store-panel-title">気になる一着を、オンラインで。</h2><p>販売中の商品、サイズ、価格は公式オンラインストアでご覧いただけます。</p></div><a class="button" href="${escape(shop.href)}">BASEのオンラインストアへ <span aria-hidden="true">↗</span></a></section>`);
+    html = html.replace(/<a class="header-shop" href="[^"]*">BASEショップへ <span aria-hidden="true">↗<\/span><\/a>/g,
+      () => `<a class="header-shop" href="${escape(shop.href)}">BASEショップへ <span aria-hidden="true">↗</span></a>`);
+    html = html.replace(/<div class="announcement">[\s\S]*?<\/div>/,
+      '<div class="announcement"><span>LIFE IS MAX BET</span><span>公式ショップはBASEでご覧いただけます</span></div>');
+    html = replaceRegion(html, 'store-panel', `<section class="store-panel" aria-labelledby="store-panel-title"><div><p class="eyebrow">公式オンラインストア</p><h2 id="store-panel-title">気になる一着を、オンラインで。</h2><p>販売中の商品、サイズ、価格は公式オンラインストアでご覧いただけます。</p></div><a class="button" href="${escape(shop.href)}">BASEショップを見る <span aria-hidden="true">↗</span></a></section>`);
     html = replaceRegion(html, 'guide-purchase', '<details><summary>どこで購入できますか？</summary><p>公式オンラインストア（BASE）で購入できます。商品・サイズ・数量を選び、カートから購入手続きへお進みください。このサイトの写真には制作イメージが含まれます。実際の商品写真と販売条件はBASEの商品ページをご確認ください。</p></details>');
     html = replaceRegion(html, 'guide-intro', '<p>お買いものは公式オンラインストアへ。<br>新作や日々の様子は、公式Instagramへ。</p>');
     html = replaceRegion(html, 'guide-delivery', '<details><summary>サイズ・配送・返品について</summary><p>サイズ展開や実寸、送料、発送目安、返品・交換条件は、公式オンラインストア（BASE）の商品ページとご利用案内をご確認ください。</p></details>');
