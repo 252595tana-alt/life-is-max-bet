@@ -2,6 +2,22 @@
 
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#main-nav');
+// Keep the home hero clear; reveal navigation after the visitor starts scrolling.
+const scrollHeader = document.querySelector('.home-page .site-header');
+if (scrollHeader) {
+  let headerUpdatePending = false;
+  const updateScrollHeader = () => {
+    scrollHeader.classList.toggle('is-visible', window.scrollY > 32);
+    headerUpdatePending = false;
+  };
+  window.addEventListener('scroll', () => {
+    if (headerUpdatePending) return;
+    headerUpdatePending = true;
+    window.requestAnimationFrame(updateScrollHeader);
+  }, { passive: true });
+  window.addEventListener('pageshow', updateScrollHeader);
+  updateScrollHeader();
+}
 function closeMenu(restoreFocus = false) {
   menuButton?.setAttribute('aria-expanded', 'false');
   menuButton?.setAttribute('aria-label', 'メニューを開く');

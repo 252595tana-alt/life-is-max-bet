@@ -26,6 +26,8 @@ figure,h1,h2,h3,p{margin:0}
 .announcement span:first-child{color:var(--white)}
 .announcement span+span{padding-left:16px;border-left:1px solid var(--line)}
 .site-header{height:72px;padding:0 var(--page-inset);display:flex;justify-content:center;align-items:center;gap:40px;background:var(--black);color:var(--white);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
+.js .home-page .site-header{position:fixed;inset:0 0 auto;transform:translateY(calc(-100% - 2px));opacity:0;pointer-events:none;transition:transform .25s ease,opacity .2s ease}
+.js .home-page .site-header.is-visible,.js .home-page .site-header:has(:focus-visible),.js .home-page.menu-open .site-header{transform:translateY(0);opacity:1;pointer-events:auto}
 .site-header nav{display:flex;gap:32px;align-items:center}
 .site-header nav a{font-size:14px;font-weight:500;white-space:nowrap;min-height:48px;display:flex;align-items:center;position:relative}
 .site-header nav a::after{content:'';position:absolute;bottom:5px;left:0;right:0;height:2px;background:var(--red);transform:scaleX(0);transform-origin:left;transition:transform .2s}
