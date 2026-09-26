@@ -10,7 +10,7 @@ Red and black editorial brand site. The original TOP and lookbook stay independe
 - product-tee.html: T-shirt concept
 - product-cap.html: cap concept
 
-Product pages include detail views, an accessible image zoom dialog, and related items. Current product imagery is illustrative. The BASE shop exists at <https://lifemaxbet.base.shop/>, but no actual products have been decided or listed, so the brand site does not accept orders and purchase links remain disabled.
+Product pages include detail views, an accessible image zoom dialog, and related items. Current product imagery is illustrative. The selected BASE account's shop URL is <https://lifeismaxbet.base.shop/>. No actual products have been decided or listed, so the brand site does not accept orders and purchase links remain disabled.
 
 ## Assets
 
@@ -49,7 +49,7 @@ GitHub Pages [does not permit e-commerce hosting](https://docs.github.com/en/pag
 
 ## Before selling
 
-The BASE account is configured with the free SIMPLE theme, a black background, red accents, a high-contrast brand title, and navigation links back to BRAND TOP and LOOKBOOK. No products have been decided or listed. Before selling, add confirmed product photos and details in BASE, complete payment, shipping and seller information, move the brand site to production hosting, update the two temporary BASE navigation URLs, and set confirmed product mappings. No purchase flow has been tested.
+The selected BASE account is configured with the free SIMPLE theme, a black background, red accents, a high-contrast brand title, and navigation links back to BRAND TOP and LOOKBOOK. Its shop is currently private and BASE has suspended its payment feature pending a settings update, so do not sell yet. No products have been decided or listed. Before selling, restore payment and shop visibility, add confirmed product photos and details in BASE, complete shipping and seller information, move the brand site to production hosting, update the two temporary BASE navigation URLs, and set confirmed product mappings. No purchase flow has been tested.
 
 Detailed Japanese handoff material, the logo and a product-mapping worksheet are retained locally under `ECサイト構築素材/BASE設定パッケージ/`; the architecture decision is in `ECサイト構築素材/スクラッチとBASEの連携方針.md`.
 
