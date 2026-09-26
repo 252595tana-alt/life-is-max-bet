@@ -95,6 +95,7 @@ for (const page of pages) {
       '<div class="announcement"><span>LIFE IS MAX BET</span><span>商品はBASEで販売中</span></div>');
     html = replaceRegion(html, 'store-panel', `<section class="store-panel" aria-labelledby="store-panel-title"><div><p class="eyebrow">公式オンラインストア</p><h2 id="store-panel-title">気になる一着を、オンラインで。</h2><p>販売中の商品、サイズ、価格はBASEの商品ページでご確認いただけます。</p></div><a class="button" href="${escape(shop.href)}">BASEでお気に入りを見つける <span aria-hidden="true">↗</span></a></section>`);
     html = replaceRegion(html, 'guide-purchase', '<details><summary>どこで購入できますか？</summary><p>公式オンラインストア（BASE）で購入できます。商品・サイズ・数量を選び、カートから購入手続きへお進みください。このサイトの写真には制作イメージが含まれます。実際の商品写真と販売条件はBASEの商品ページをご確認ください。</p></details>');
+    html = replaceRegion(html, 'guide-payment', '<details><summary>決済方法は？</summary><p>利用可能な決済方法はBASEの注文画面でご確認ください。表示された方法を選び、画面の案内に沿ってお支払いください。</p></details>');
     html = replaceRegion(html, 'guide-intro', '<p>お買いものは公式オンラインストアへ。<br>新作や日々の様子は、公式Instagramへ。</p>');
     html = replaceRegion(html, 'guide-delivery', '<details><summary>サイズ・配送・返品について</summary><p>サイズ展開や実寸、送料、発送目安、返品・交換条件は、公式オンラインストア（BASE）の商品ページとご利用案内をご確認ください。</p></details>');
     const purchase = purchaseBlock(productPages[page]);
