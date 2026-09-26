@@ -46,7 +46,7 @@ figure,h1,h2,h3,p{margin:0}
 .hero-image{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;z-index:0}
 .hero-collection-link{position:absolute;z-index:1;left:39.8%;top:83.2%;width:20.4%;height:8.2%;border:0;background:transparent}
 .hero-collection-link:focus-visible{background:#d71926dd;outline:3px solid #fff;outline-offset:0;display:grid;place-items:center}
-.hero-collection-link:focus-visible::after{content:'コレクションを見る ↗';font-size:12px;font-weight:700;color:#fff}
+.hero-collection-link:focus-visible::after{content:'商品一覧を見る ↗';font-size:12px;font-weight:700;color:#fff}
 .image-disclosure{color:var(--gray);font-size:10px;line-height:1.8}
 .ticker{overflow:hidden;width:100%;padding:0;background:var(--red);color:#fff;border-bottom:1px solid #ffffff40}
 .ticker-track{display:flex;width:max-content;animation:ticker-flow-right 30s linear infinite}
@@ -72,6 +72,9 @@ figure,h1,h2,h3,p{margin:0}
 .card-info h3{font:600 clamp(23px,2.2vw,31px)/1.1 var(--display);letter-spacing:.01em}
 .card-category{color:#ff5a60;font:500 10px var(--display);letter-spacing:.11em;margin-bottom:6px}
 .card-info p:last-child{color:var(--gray);font-size:11px;margin-top:7px}
+.card-info .card-link-label{display:flex;align-items:center;gap:8px;color:var(--white);text-decoration:underline;text-decoration-color:#ffffff55;text-underline-offset:4px}
+.card-link-label span{font-size:15px;color:#ff5a60}
+.product-card>a:hover .card-link-label,.product-card>a:focus-visible .card-link-label{color:#ff5a60;text-decoration-color:var(--red)}
 .card-info>span{padding-top:20px;color:var(--gray);font-size:11px;white-space:nowrap}
 .brand-statement{background:var(--red);padding:55px var(--gutter);display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:center}
 .brand-statement h2{font:700 clamp(52px,6.5vw,96px)/.85 var(--display);letter-spacing:-.015em;color:#fff}
