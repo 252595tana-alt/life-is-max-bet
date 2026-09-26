@@ -1,0 +1,10 @@
+{
+  "enabled": false,
+  "brandSiteUrl": "",
+  "baseShopUrl": "",
+  "products": {
+    "denim-jacket": { "baseItemUrl": "", "confirmed": false },
+    "logo-tee": { "baseItemUrl": "", "confirmed": false },
+    "logo-cap": { "baseItemUrl": "", "confirmed": false }
+  }
+}

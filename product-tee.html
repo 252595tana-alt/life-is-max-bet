@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
   <script src="script.js?v=4" defer></script>
 </head>
 <body>
@@ -30,7 +30,7 @@
       <a href="index.html#about">ABOUT</a>
       <a href="index.html#guide">GUIDE</a>
     </nav>
-    <a class="header-shop" href="shop.html">ALL ITEMS <span aria-hidden="true">↗</span></a>
+    <a class="header-shop" data-base-shop href="shop.html">ALL ITEMS <span aria-hidden="true">↗</span></a>
     <button class="menu-toggle" type="button" aria-controls="main-nav" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span></button>
   </header>
 <main id="main">
@@ -50,15 +50,15 @@
         <p class="product-jp">ロゴTシャツ / コンセプト</p>
         <span class="concept-tag">CONCEPT IMAGE / 制作イメージ</span>
         <p class="product-description">公式投稿に登場する鮮やかな赤いTシャツと、胸元の円形ロゴを参考にしています。街でもアウトドアでも、普段のスタイルに自然と取り入れたくなる一枚のイメージです。</p>
-        <div class="product-price"><strong>価格未定</strong><span>発売前にご案内</span></div>
+        <!-- commerce:purchase:start --><div class="product-price"><strong>価格未定</strong><span>発売前にご案内</span></div>
         <dl class="product-options"><dt>COLOR IMAGE</dt><dd><span class="swatch red" aria-hidden="true"></span>RED</dd><dt>SIZE</dt><dd>サイズ展開は後日公開</dd><dt>RELEASE</dt><dd>販売開始日未定</dd></dl>
         <button class="purchase-button" type="button" disabled>COMING SOON — 販売準備中</button>
-        <p class="purchase-note">この画像は制作イメージです。実際の商品・仕様・価格は発売時にご案内します。</p>
+        <p class="purchase-note">この画像は制作イメージです。実際の商品・仕様・価格は発売時にご案内します。</p><!-- commerce:purchase:end -->
         <a class="reference-link" href="https://www.instagram.com/lifeismaxbet/p/DaVYWZJTG74/" target="_blank" rel="noopener noreferrer">参考にした公式投稿を見る ↗</a>
         <div class="accordion">
           <details open><summary>デザインのイメージ</summary><p>赤・紫・青のTシャツが並ぶ公式投稿から、赤をピックアップ。LIFE、IS、MAXBETを円形に組んだ文字を、胸元のアクセントとして表現しました。</p></details>
-          <details><summary>素材・サイズについて</summary><p>素材、寸法、サイズ展開は企画確定後に掲載します。現在の画像から実際の素材やフィット感は判断できません。</p></details>
-          <details><summary>配送・返品について</summary><p>送料・発送目安・返品条件は販売開始前にご案内します。現在このページで購入手続きはできません。</p></details>
+          <!-- commerce:product-terms:start --><details><summary>素材・サイズについて</summary><p>素材、寸法、サイズ展開は企画確定後に掲載します。現在の画像から実際の素材やフィット感は判断できません。</p></details>
+          <details><summary>配送・返品について</summary><p>送料・発送目安・返品条件は販売開始前にご案内します。現在このページで購入手続きはできません。</p></details><!-- commerce:product-terms:end -->
         </div>
       </div>
     </section>
@@ -69,7 +69,7 @@
       <img src="assets/jacket-ig-card.webp" srcset="assets/jacket-ig-card.webp 600w, assets/jacket-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="赤と白の円形文字を配したブルーデニムジャケット。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
       <span class="card-label">CONCEPT / JACKET</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
     </div>
-    <div class="card-info"><div><p class="card-category">JACKET</p><h3>DENIM JACKET</h3><p>デニムジャケット / 参考イメージ</p></div><span>価格未定</span></div>
+    <div class="card-info"><div><p class="card-category">JACKET</p><h3>DENIM JACKET</h3><p>デニムジャケット / 参考イメージ</p></div><span data-product-price="denim-jacket">価格未定</span></div>
   </a>
 </article>
 <article class="product-card" data-category="CAP">
@@ -78,7 +78,7 @@
       <img src="assets/cap-ig-card.webp" srcset="assets/cap-ig-card.webp 600w, assets/cap-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="赤と白のゴシック文字を配置した黒いフラットブリムキャップ。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
       <span class="card-label">CONCEPT / CAP</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
     </div>
-    <div class="card-info"><div><p class="card-category">CAP</p><h3>LOGO CAP</h3><p>ロゴキャップ / コンセプト</p></div><span>価格未定</span></div>
+    <div class="card-info"><div><p class="card-category">CAP</p><h3>LOGO CAP</h3><p>ロゴキャップ / コンセプト</p></div><span data-product-price="logo-cap">価格未定</span></div>
   </a>
 </article></div></section>
 </main>

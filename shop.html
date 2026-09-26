@@ -15,7 +15,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   
-  <link rel="stylesheet" href="styles.css?v=4">
+  <link rel="stylesheet" href="styles.css?v=5">
   <script src="script.js?v=4" defer></script>
 </head>
 <body>
@@ -30,7 +30,7 @@
       <a href="index.html#about">ABOUT</a>
       <a href="index.html#guide">GUIDE</a>
     </nav>
-    <a class="header-shop" href="shop.html">ALL ITEMS <span aria-hidden="true">↗</span></a>
+    <a class="header-shop" data-base-shop href="shop.html">ALL ITEMS <span aria-hidden="true">↗</span></a>
     <button class="menu-toggle" type="button" aria-controls="main-nav" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span></button>
   </header>
 <main id="main">
@@ -38,6 +38,9 @@
     <nav class="breadcrumbs" aria-label="パンくず"><a href="index.html">HOME</a><span aria-hidden="true">/</span><span>COLLECTION</span></nav>
     <div class="page-intro-row"><h1 class="page-title" id="shop-title">THE<br>LINEUP<em>.</em></h1><p>デニム、Tシャツ、キャップ。<br>公式Instagramの服を参考にした商品イメージ。</p></div>
   </section>
+  <!-- commerce:store-panel:start -->
+  <section class="store-panel" aria-labelledby="store-panel-title"><div><p class="eyebrow">OFFICIAL ONLINE STORE / COMING SOON</p><h2 id="store-panel-title">オンラインストアを準備しています。</h2><p>新作や販売のお知らせは、公式Instagramへ。</p></div><a class="text-link" href="https://www.instagram.com/lifeismaxbet/" target="_blank" rel="noopener noreferrer">@lifeismaxbet <span aria-hidden="true">↗</span></a></section>
+  <!-- commerce:store-panel:end -->
   <section class="catalog" aria-label="商品イメージ一覧">
     <div class="filter-bar">
       <div class="filters" role="group" aria-label="商品カテゴリ"><button class="filter" data-filter="ALL" aria-pressed="true">ALL</button><button class="filter" data-filter="JACKET" aria-pressed="false">JACKET</button><button class="filter" data-filter="T-SHIRT" aria-pressed="false">T-SHIRT</button><button class="filter" data-filter="CAP" aria-pressed="false">CAP</button></div>
@@ -49,7 +52,7 @@
       <img src="assets/jacket-ig-card.webp" srcset="assets/jacket-ig-card.webp 600w, assets/jacket-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="赤と白の円形文字を配したブルーデニムジャケット。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
       <span class="card-label">CONCEPT / JACKET</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
     </div>
-    <div class="card-info"><div><p class="card-category">JACKET</p><h3>DENIM JACKET</h3><p>デニムジャケット / 参考イメージ</p></div><span>価格未定</span></div>
+    <div class="card-info"><div><p class="card-category">JACKET</p><h3>DENIM JACKET</h3><p>デニムジャケット / 参考イメージ</p></div><span data-product-price="denim-jacket">価格未定</span></div>
   </a>
 </article>
 <article class="product-card" data-category="T-SHIRT">
@@ -58,7 +61,7 @@
       <img src="assets/tee-ig-card.webp" srcset="assets/tee-ig-card.webp 600w, assets/tee-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="胸に円形のブランド文字を配置した赤いTシャツ。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
       <span class="card-label">CONCEPT / T-SHIRT</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
     </div>
-    <div class="card-info"><div><p class="card-category">T-SHIRT</p><h3>LOGO T-SHIRT</h3><p>ロゴTシャツ / コンセプト</p></div><span>価格未定</span></div>
+    <div class="card-info"><div><p class="card-category">T-SHIRT</p><h3>LOGO T-SHIRT</h3><p>ロゴTシャツ / コンセプト</p></div><span data-product-price="logo-tee">価格未定</span></div>
   </a>
 </article>
 <article class="product-card" data-category="CAP">
@@ -67,7 +70,7 @@
       <img src="assets/cap-ig-card.webp" srcset="assets/cap-ig-card.webp 600w, assets/cap-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="赤と白のゴシック文字を配置した黒いフラットブリムキャップ。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
       <span class="card-label">CONCEPT / CAP</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
     </div>
-    <div class="card-info"><div><p class="card-category">CAP</p><h3>LOGO CAP</h3><p>ロゴキャップ / コンセプト</p></div><span>価格未定</span></div>
+    <div class="card-info"><div><p class="card-category">CAP</p><h3>LOGO CAP</h3><p>ロゴキャップ / コンセプト</p></div><span data-product-price="logo-cap">価格未定</span></div>
   </a>
 </article></div>
     <p class="image-disclosure catalog-disclosure">すべて制作イメージです。実際の商品・仕様・価格は発売前にご案内します。</p>

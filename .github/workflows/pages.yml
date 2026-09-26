@@ -26,14 +26,11 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Prepare public site files
-        run: |
-          mkdir -p _site/assets
-          cp index.html shop.html product.html product-tee.html product-cap.html styles.css script.js .nojekyll _site/
-          cp assets/*.webp assets/favicon.svg _site/assets/
+        run: node scripts/build-site.mjs --preview
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: .publish/preview
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
