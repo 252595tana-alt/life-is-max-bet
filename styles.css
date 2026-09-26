@@ -187,7 +187,8 @@ figure,h1,h2,h3,p{margin:0}
   .header-shop{margin-left:auto;padding-left:0;border:0;font-size:11px;gap:8px;white-space:nowrap}.header-shop span{font-size:18px}.menu-toggle{display:block;flex-shrink:0}
   .site-header nav{display:none;position:absolute;inset:68px 0 auto;padding:20px var(--gutter) 28px;background:var(--black);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:2px}
   .site-header nav.open{display:flex}.site-header nav a{width:100%;padding:12px 0;font-size:18px}
-  .ticker-group{gap:14px;padding:13px 12px;font-size:9px;letter-spacing:.08em}
+  .ticker-group{flex:0 0 max-content;min-width:100vw;justify-content:center;gap:22px;padding:13px 12px;font-size:9px;letter-spacing:.04em}
+  .hero-collection-link{left:31%;top:79%;width:38%;height:14%;min-height:44px}
   .section{padding-top:65px;padding-bottom:65px}
   .section-heading{gap:14px;margin-bottom:26px;flex-wrap:wrap}.section-heading h2{font-size:48px}.section-heading .eyebrow{font-size:10px}
   .section-heading .text-link{font-size:11px;gap:14px;white-space:nowrap}.collection-note{font-size:11px}
@@ -212,6 +213,15 @@ figure,h1,h2,h3,p{margin:0}
   .related .product-grid .product-card:first-child{grid-column:auto}.related .product-grid .product-card:first-child .card-image{aspect-ratio:4/5}
   .image-dialog{width:94vw}
   .store-panel{align-items:flex-start;flex-direction:column;margin-bottom:30px;gap:20px}.store-panel h2{font-size:17px}.store-panel .button{width:100%;gap:15px}
+}
+@media(max-width:380px){
+  :root{--gutter:18px}
+  .announcement{gap:8px;font-size:8px}.announcement span:first-child{font-size:10px}
+  .header-shop{font-size:10px}
+  .section-heading h2{font-size:42px}.brand-statement h2{font-size:51px}
+  .card-info h3{font-size:20px}
+  .filters{gap:12px}
+  .page-title{font-size:58px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
 

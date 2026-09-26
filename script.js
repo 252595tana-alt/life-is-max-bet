@@ -37,7 +37,7 @@ function applyFilter(category) {
     if (!card.hidden) count += 1;
   });
   const countLabel = document.querySelector('.item-count');
-  if (countLabel) countLabel.textContent = count + (count === 1 ? ' CONCEPT' : ' CONCEPTS');
+  if (countLabel) countLabel.textContent = count + '点の商品イメージ';
   document.querySelector('.catalog')?.classList.toggle('filtered', selected !== 'ALL');
 }
 if (filters.length) {
