@@ -2,28 +2,55 @@
 
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('#main-nav');
-function closeMenu() {
+function closeMenu(restoreFocus = false) {
   menuButton?.setAttribute('aria-expanded', 'false');
   menuButton?.setAttribute('aria-label', 'メニューを開く');
   navigation?.classList.remove('open');
+  document.body.classList.remove('menu-open');
+  document.querySelectorAll('main, .site-footer').forEach(element => { element.inert = false; });
+  if (restoreFocus) menuButton?.focus();
 }
 menuButton?.addEventListener('click', () => {
   const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
-  menuButton.setAttribute('aria-expanded', String(!isOpen));
-  menuButton.setAttribute('aria-label', isOpen ? 'メニューを開く' : 'メニューを閉じる');
-  navigation.classList.toggle('open', !isOpen);
+  if (isOpen) { closeMenu(true); return; }
+  menuButton.setAttribute('aria-expanded', 'true');
+  menuButton.setAttribute('aria-label', 'メニューを閉じる');
+  navigation.classList.add('open');
+  document.body.classList.add('menu-open');
+  document.querySelectorAll('main, .site-footer').forEach(element => { element.inert = true; });
+  navigation.querySelector('a')?.focus();
 });
-navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', closeMenu));
+navigation?.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeMenu()));
 document.addEventListener('keydown', event => {
-  if (event.key === 'Escape' && menuButton?.getAttribute('aria-expanded') === 'true') {
-    closeMenu();
-    menuButton.focus();
+  if (menuButton?.getAttribute('aria-expanded') !== 'true') return;
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    closeMenu(true);
+  } else if (event.key === 'Tab') {
+    const controls = [...document.querySelectorAll('.site-header a, .menu-toggle')];
+    const first = controls[0];
+    const last = controls[controls.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault(); last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault(); first.focus();
+    }
   }
 });
 document.addEventListener('click', event => {
   if (!event.target.closest('.site-header')) closeMenu();
 });
-window.matchMedia('(min-width: 701px)').addEventListener('change', closeMenu);
+window.matchMedia('(min-width: 901px)').addEventListener('change', () => closeMenu());
+
+// Motion can be paused without losing the original English brand copy.
+const ticker = document.querySelector('.ticker');
+const tickerButton = document.querySelector('.ticker-toggle');
+tickerButton?.addEventListener('click', () => {
+  const paused = ticker.classList.toggle('paused');
+  tickerButton.setAttribute('aria-pressed', String(paused));
+  tickerButton.setAttribute('aria-label', paused ? '流れる文字を再生' : '流れる文字を一時停止');
+  tickerButton.querySelector('span').textContent = paused ? '▶' : 'Ⅱ';
+});
 
 // Collection filtering preserves a shareable URL and browser back/forward.
 const filters = [...document.querySelectorAll('[data-filter]')];

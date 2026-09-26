@@ -13,7 +13,7 @@ const preview = mode === '--preview';
 const config = JSON.parse(await readFile(path.join(root, 'commerce.config.json'), 'utf8'));
 const pages = ['index.html', 'shop.html', 'product.html', 'product-tee.html', 'product-cap.html'];
 const staticFiles = ['styles.css', 'script.js', '.nojekyll'];
-const images = ['brand-logo.webp', 'campaign-ig.webp', 'hero-campaign.webp', 'jacket-ig.webp', 'jacket-ig-card.webp', 'tee-ig.webp', 'tee-ig-card.webp', 'cap-ig.webp', 'cap-ig-card.webp', 'favicon.svg'];
+const images = ['brand-logo.webp', 'campaign-ig.webp', 'hero-campaign.webp', 'hero-emblem-reference.png', 'jacket-ig.webp', 'jacket-ig-card.webp', 'tee-ig.webp', 'tee-ig-card.webp', 'cap-ig.webp', 'cap-ig-card.webp', 'favicon.svg'];
 const productPages = { 'product.html': 'denim-jacket', 'product-tee.html': 'logo-tee', 'product-cap.html': 'logo-cap' };
 const live = !preview && config.enabled === true;
 const escape = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
