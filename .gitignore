@@ -1,0 +1,7 @@
+.site-check/
+ECサイト構築素材/
+*.docx
+docs/
+node_modules/
+.publish/
+*.log

@@ -3,49 +3,87 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#0b0b0b">
-  <meta name="description" content="Life is Max Bet のコレクション。最初のDROPに向けて準備中です。">
-  <title>SHOP / ITEMS — LIFE IS MAX BET</title>
+  <meta name="theme-color" content="#101010">
+  <meta name="description" content="ジャケット、Tシャツ、キャップ。LIFE IS MAX BETのコレクションのイメージ。">
+  <meta property="og:title" content="COLLECTION — LIFE IS MAX BET">
+  <meta property="og:description" content="ジャケット、Tシャツ、キャップ。LIFE IS MAX BETのコレクションのイメージ。">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://252595tana-alt.github.io/life-is-max-bet/assets/campaign-ig.webp">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>COLLECTION — LIFE IS MAX BET</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  
+  <link rel="stylesheet" href="styles.css?v=4">
+  <script src="script.js?v=4" defer></script>
 </head>
-<body class="shop-page">
+<body>
+
   <a class="skip-link" href="#main">本文へスキップ</a>
+  <div class="announcement"><span>ONLINE STORE — PREVIEW</span><span>オンラインストア準備中</span></div>
   <header class="site-header">
-    <a class="wordmark" href="index.html" aria-label="Life is Max Bet トップ">L<span>·</span>M<span>·</span>B</a>
-    <nav aria-label="メインナビゲーション">
+    <a class="brand-home" href="index.html" aria-label="LIFE IS MAX BET ホーム"><img src="assets/brand-logo.webp" width="48" height="48" alt=""><span class="wordmark">LIFE IS<br>MAX <span>BET.</span></span></a>
+    <nav id="main-nav" aria-label="メインナビゲーション">
+      <a href="shop.html" aria-current="page">COLLECTION</a>
+      <a href="index.html#lookbook">LOOKBOOK</a>
       <a href="index.html#about">ABOUT</a>
-      <a href="shop.html" aria-current="page">SHOP</a>
-      <a href="index.html#journal">JOURNAL</a>
-      <a href="index.html#social">SOCIAL</a>
+      <a href="index.html#guide">GUIDE</a>
     </nav>
-    <a class="header-cta" href="index.html#social">FOLLOW THE DROP <span>↗</span></a>
-    <button class="menu-toggle" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span></button>
+    <a class="header-shop" href="shop.html">ALL ITEMS <span aria-hidden="true">↗</span></a>
+    <button class="menu-toggle" type="button" aria-controls="main-nav" aria-label="メニューを開く" aria-expanded="false"><span></span><span></span></button>
   </header>
-  <main id="main">
-    <section class="shop-hero">
-      <p class="eyebrow"><span class="live-dot"></span> L·M·B / COLLECTION 001</p>
-      <h1>SHOP<span>.</span><br><em>THE PLAY.</em></h1>
-      <div class="shop-intro"><span>01 — FIRST DROP</span><p>最初のコレクションを準備しています。<br>アイテム情報は公開に向けて更新します。</p></div>
-      <div class="shop-cross" aria-hidden="true">✳</div>
-    </section>
-    <section class="catalog section-pad" aria-labelledby="catalog-title">
-      <div class="section-tag"><span>01 / THE LINEUP</span><span>COMING INTO FOCUS</span></div>
-      <div class="catalog-heading"><h2 id="catalog-title">FIRST<br><em>COLLECTION</em></h2><p>01 ITEMS — 00 AVAILABLE</p></div>
-      <div class="product-grid">
-        <a class="product-card product-card-featured" href="product.html">
-          <div class="product-visual visual-jacket" aria-label="商品写真を後から設定します"><span class="visual-orbit"></span><span class="visual-type">L<br>M<br>B</span><span class="visual-label">IMAGE<br>COMING<br>SOON</span><b class="product-status">IN THE MAKING</b><span class="product-index">001</span></div>
-          <div class="product-meta"><div><span class="product-category">FIRST DROP / 001</span><h3>THE FIRST PIECE</h3><p>商品情報を準備しています</p></div><span class="product-arrow">↗</span></div>
-        </a>
-        <div class="catalog-note"><span class="note-mark">✳</span><h3>MADE FOR<br>THE NEXT MOVE.</h3><p>写真、素材、サイズ、価格を整えてから商品情報を掲載します。公開まで、もう少しお待ちください。</p><a href="index.html#social">最新情報をチェック <span>↗</span></a></div>
+<main id="main">
+  <section class="page-intro" aria-labelledby="shop-title">
+    <nav class="breadcrumbs" aria-label="パンくず"><a href="index.html">HOME</a><span aria-hidden="true">/</span><span>COLLECTION</span></nav>
+    <div class="page-intro-row"><h1 class="page-title" id="shop-title">THE<br>LINEUP<em>.</em></h1><p>デニム、Tシャツ、キャップ。<br>公式Instagramの服を参考にした商品イメージ。</p></div>
+  </section>
+  <section class="catalog" aria-label="商品イメージ一覧">
+    <div class="filter-bar">
+      <div class="filters" role="group" aria-label="商品カテゴリ"><button class="filter" data-filter="ALL" aria-pressed="true">ALL</button><button class="filter" data-filter="JACKET" aria-pressed="false">JACKET</button><button class="filter" data-filter="T-SHIRT" aria-pressed="false">T-SHIRT</button><button class="filter" data-filter="CAP" aria-pressed="false">CAP</button></div>
+      <span class="item-count" aria-live="polite">3 CONCEPTS</span>
+    </div>
+    <div class="product-grid"><article class="product-card" data-category="JACKET">
+  <a href="product.html" aria-label="DENIM JACKET の商品イメージを見る">
+    <div class="card-image">
+      <img src="assets/jacket-ig-card.webp" srcset="assets/jacket-ig-card.webp 600w, assets/jacket-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="赤と白の円形文字を配したブルーデニムジャケット。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
+      <span class="card-label">CONCEPT / JACKET</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
+    </div>
+    <div class="card-info"><div><p class="card-category">JACKET</p><h3>DENIM JACKET</h3><p>デニムジャケット / 参考イメージ</p></div><span>価格未定</span></div>
+  </a>
+</article>
+<article class="product-card" data-category="T-SHIRT">
+  <a href="product-tee.html" aria-label="LOGO T-SHIRT の商品イメージを見る">
+    <div class="card-image">
+      <img src="assets/tee-ig-card.webp" srcset="assets/tee-ig-card.webp 600w, assets/tee-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="胸に円形のブランド文字を配置した赤いTシャツ。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
+      <span class="card-label">CONCEPT / T-SHIRT</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
+    </div>
+    <div class="card-info"><div><p class="card-category">T-SHIRT</p><h3>LOGO T-SHIRT</h3><p>ロゴTシャツ / コンセプト</p></div><span>価格未定</span></div>
+  </a>
+</article>
+<article class="product-card" data-category="CAP">
+  <a href="product-cap.html" aria-label="LOGO CAP の商品イメージを見る">
+    <div class="card-image">
+      <img src="assets/cap-ig-card.webp" srcset="assets/cap-ig-card.webp 600w, assets/cap-ig.webp 1024w" sizes="(max-width:700px) 90vw, 30vw" width="1024" height="1536" alt="赤と白のゴシック文字を配置した黒いフラットブリムキャップ。公式投稿を参考にしたAIイメージ" loading="lazy" decoding="async">
+      <span class="card-label">CONCEPT / CAP</span><span class="image-disclosure">商品イメージ</span><span class="card-arrow" aria-hidden="true">↗</span>
+    </div>
+    <div class="card-info"><div><p class="card-category">CAP</p><h3>LOGO CAP</h3><p>ロゴキャップ / コンセプト</p></div><span>価格未定</span></div>
+  </a>
+</article></div>
+    <p class="image-disclosure catalog-disclosure">すべて制作イメージです。実際の商品・仕様・価格は発売前にご案内します。</p>
+  </section>
+  <section class="catalog-story"><img src="assets/campaign-ig.webp" width="1536" height="1024" alt="" loading="lazy"><div><p class="eyebrow">LOOKBOOK / EVERYDAY OUTSIDE</p><h2>LIFE IN<br>MOTION.</h2><a class="text-link" href="index.html#lookbook">ルックブックを見る <span aria-hidden="true">↗</span></a></div></section>
+</main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a class="footer-logo" href="index.html">LIFE IS<br>MAX <span>BET.</span></a>
+      <div class="footer-links">
+        <div><a href="shop.html">COLLECTION</a><a href="index.html#lookbook">LOOKBOOK</a><a href="index.html#about">ABOUT</a></div>
+        <div><a href="index.html#guide">SHOPPING GUIDE</a><a href="https://www.instagram.com/lifeismaxbet/" target="_blank" rel="noopener noreferrer">INSTAGRAM ↗<small>@lifeismaxbet</small></a><a href="#main">BACK TO TOP ↑</a></div>
       </div>
-    </section>
-    <section class="shop-cta"><p>THE STORY STARTS<br>BEFORE THE DROP.</p><a href="index.html#social">FOLLOW THE JOURNEY <span>↗</span></a></section>
-  </main>
-  <footer class="site-footer"><a class="footer-mark" href="index.html">L<span>·</span>M<span>·</span>B</a><p>MAKE YOUR MOVE. OWN YOUR ODDS.</p><a class="footer-shop" href="index.html">BACK TO HOME</a><span>© 2026 LIFE IS MAX BET</span><a class="back-top" href="#main" aria-label="ページの先頭へ">↑</a></footer>
-  <script src="script.js"></script>
+    </div>
+    <div class="footer-bottom"><span>© 2026 LIFE IS MAX BET</span><p class="image-disclosure">商品・着用写真は公式投稿を参考にしたAIイメージです。実物とは異なります。</p><span>BET ON YOURSELF.</span></div>
+  </footer>
 </body>
 </html>
