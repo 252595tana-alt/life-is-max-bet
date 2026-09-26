@@ -78,8 +78,18 @@ for (const [folder, allowed] of [[output, [...pages, ...staticFiles, 'assets', '
 
 for (const page of pages) {
   let html = await readFile(path.join(root, page), 'utf8');
+  // Keep the brand site connected to the shop while its BASE catalog is still being prepared.
+  // Product-specific purchase links remain gated by `enabled` and confirmed item URLs below.
+  const shopUrl = publicUrl(config.baseShopUrl, 'baseShopUrl');
+  if (shopUrl.pathname !== '/') throw new Error('baseShopUrlにはBASEショップのトップURLを指定してください。');
+  html = html.replace(/<a class="header-shop" data-base-shop href="[^"]*">[\s\S]*?<\/a>/g,
+    () => `<a class="header-shop" href="${escape(shopUrl.href)}">BASE STORE <span aria-hidden="true">↗</span></a>`);
+  html = html.replace(/(<a class="hero-collection-link" data-base-shop href=")[^"]*("[^>]*>)/g,
+    (_, before, after) => `${before}${escape(shopUrl.href)}${after}`);
+  html = html.replace(/(<a class="text-link" data-base-shop href=")[^"]*("[^>]*>)/g,
+    (_, before, after) => `${before}${escape(shopUrl.href)}${after}`);
   if (live) {
-    html = html.replace(/<a class="header-shop" data-base-shop href="shop.html">[\s\S]*?<\/a>/g,
+    html = html.replace(/<a class="header-shop" href="[^"]*">BASE STORE <span aria-hidden="true">↗<\/span><\/a>/g,
       () => `<a class="header-shop" href="${escape(shop.href)}">ONLINE STORE <span aria-hidden="true">↗</span></a>`);
     html = html.replace('<span>ONLINE STORE — PREVIEW</span><span>オンラインストア準備中</span>',
       '<span>LIFE IS MAX BET</span><span>公式オンラインストアはBASEへ</span>');
