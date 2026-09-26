@@ -26,7 +26,7 @@ The main branch builds a preview with .github/workflows/pages.yml. Only explicit
 
 `wrangler.jsonc` targets the existing `polished-river-d244` Worker. Wrangler runs `node scripts/build-site.mjs --production` and uploads only `.publish/production`.
 
-The intended automatic deployment trigger is a push to `main` through Cloudflare Workers Builds. Initial GitHub connection is pending additional account verification as of 2026-09-27; it is not active yet. Configure the Cloudflare build command as empty and the deploy command as `npx wrangler deploy` (the build is already defined in Wrangler).
+The intended automatic deployment trigger is a push to `main` through Cloudflare Workers Builds. The GitHub App is authorized as of 2026-09-27; the build connection still needs its deployment token configured and is not active yet. Set the Cloudflare build command to `node scripts/build-site.mjs --production` and the deploy command to `npx wrangler deploy`. Workers Builds requires an explicit build command rather than relying on Wrangler's local custom build configuration.
 
 Once connected, routine site changes should include a commit and push of the intended public files. Local file saves alone do not deploy. Build failures must be reported and fixed; do not describe a push as a successful production deployment until Cloudflare reports success. BASE design settings remain separate and are applied with BASE's Save control.
 
