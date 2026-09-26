@@ -1,10 +1,19 @@
 {
   "enabled": false,
-  "brandSiteUrl": "",
+  "brandSiteUrl": "https://polished-river-d244.252595tana.workers.dev/",
   "baseShopUrl": "https://lifeismaxbet.base.shop/",
   "products": {
-    "denim-jacket": { "baseItemUrl": "", "confirmed": false },
-    "logo-tee": { "baseItemUrl": "", "confirmed": false },
-    "logo-cap": { "baseItemUrl": "", "confirmed": false }
+    "denim-jacket": {
+      "baseItemUrl": "",
+      "confirmed": false
+    },
+    "logo-tee": {
+      "baseItemUrl": "",
+      "confirmed": false
+    },
+    "logo-cap": {
+      "baseItemUrl": "",
+      "confirmed": false
+    }
   }
 }
