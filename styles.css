@@ -1,5 +1,5 @@
 /* LIFE IS MAX BET — editorial storefront */
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;600;700&family=Rye&display=swap');
 
 :root {
   --black:#101010; --red:#d71926; --white:#f1efea; --gray:#aaa6a2;
@@ -25,9 +25,10 @@ figure,h1,h2,h3,p{margin:0}
 .announcement{min-height:29px;display:flex;justify-content:center;align-items:center;gap:18px;background:var(--red);color:#fff;font-size:10px;letter-spacing:.05em}
 .announcement span:first-child{font:600 12px var(--display);letter-spacing:.12em}
 .site-header{height:82px;padding:0 var(--gutter);display:flex;align-items:center;gap:36px;background:var(--black);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:30}
-.wordmark{font:800 21px/.83 var(--display);letter-spacing:-.015em;width:104px}
+.wordmark{font:400 18px/.94 'Rye',Georgia,serif;letter-spacing:-.035em;width:116px}
 .wordmark span{color:var(--red)}
-.brand-home{display:flex;align-items:center;gap:12px;flex-shrink:0}.brand-home img{border-radius:50%;width:48px;height:48px}
+.brand-home{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.brand-emblem{display:block;flex:none;width:56px;height:56px;border:1px solid #d71926;background-color:#171312;background-image:url('assets/hero-campaign.webp');background-repeat:no-repeat;background-size:267px auto;background-position:center 50%;box-shadow:0 0 0 3px #d719261c}
 .site-header nav{display:flex;gap:34px;align-items:center;margin-left:auto}
 .site-header nav a{font:600 13px var(--display);letter-spacing:.09em;padding:12px 0}
 .site-header nav a:hover,.site-header nav [aria-current=page]{color:#ff5a60}
@@ -185,8 +186,8 @@ figure,h1,h2,h3,p{margin:0}
 }
 @media(max-width:700px){
   html{scroll-padding-top:85px}.announcement{min-height:27px;font-size:9px}
-  .site-header{height:68px;gap:10px}.wordmark{font-size:19px;width:76px}
-  .brand-home{gap:8px}.brand-home img{width:38px;height:38px}.instagram-strip{padding-block:40px;align-items:flex-start;flex-direction:column}
+  .site-header{height:68px;gap:10px}.wordmark{font-size:15px;width:98px}
+  .brand-home{gap:8px}.brand-emblem{width:42px;height:42px;background-size:200px auto}.instagram-strip{padding-block:40px;align-items:flex-start;flex-direction:column}
   .header-shop{margin-left:auto;padding-left:0;border:0;font-size:11px;gap:8px;white-space:nowrap}.header-shop span{font-size:18px}.menu-toggle{display:block;flex-shrink:0}
   .site-header nav{display:none;position:absolute;inset:68px 0 auto;padding:20px var(--gutter) 28px;background:var(--black);border-bottom:1px solid var(--line);flex-direction:column;align-items:flex-start;gap:2px}
   .site-header nav.open{display:flex}.site-header nav a{width:100%;padding:12px 0;font-size:18px}
