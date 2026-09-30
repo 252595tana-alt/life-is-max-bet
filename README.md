@@ -1,6 +1,6 @@
 # LIFE IS MAX BET
 
-Red and black editorial brand site focused on the LIFE IS MAX BET identity. The custom TOP stays independent; a BASE store handles official product details, inventory, cart, payment and orders. Production is hosted at <https://polished-river-d244.252595tana.workers.dev/>. GitHub Pages hosts a non-selling design preview only.
+Monochrome editorial brand site focused on the LIFE IS MAX BET identity. The custom TOP stays independent; a BASE store handles official product details, inventory, cart, payment and orders. Production is hosted at <https://polished-river-d244.252595tana.workers.dev/>. GitHub Pages hosts a non-selling design preview only.
 
 ## Pages
 
@@ -14,6 +14,8 @@ The brand TOP does not publish a product catalog or accept orders. Its header an
 The remaining editorial photo is an AI-created image based on the official Instagram profile (https://www.instagram.com/lifeismaxbet/). It is labeled as an illustration on the site. Earlier product mockups remain in assets/ for URL compatibility but are no longer displayed on the brand TOP. The full prompt set and original requirement documents are retained locally outside Git tracking.
 
 The home hero uses `assets/hero-lmb-logo.png`, a copy of the LMB logo image prepared for the BASE footer. The same image appears at desktop and mobile sizes.
+
+The hero and editorial photo are displayed in monochrome with CSS; their source image files are unchanged.
 
 ## Editing and publishing
 
