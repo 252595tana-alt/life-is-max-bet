@@ -1,20 +1,17 @@
 # LIFE IS MAX BET
 
-Red and black editorial brand site. The custom TOP stays independent; a BASE store handles official product details, inventory, cart, payment and orders. Production is hosted at <https://polished-river-d244.252595tana.workers.dev/>. GitHub Pages hosts a non-selling design preview only.
+Red and black editorial brand site focused on the LIFE IS MAX BET identity. The custom TOP stays independent; a BASE store handles official product details, inventory, cart, payment and orders. Production is hosted at <https://polished-river-d244.252595tana.workers.dev/>. GitHub Pages hosts a non-selling design preview only.
 
 ## Pages
 
-- index.html: campaign, collection preview, lookbook, brand story, guide
-- shop.html: collection and category filtering (URL preserves the selection)
-- product.html: denim jacket concept
-- product-tee.html: T-shirt concept
-- product-cap.html: cap concept
+- index.html: LMB logo hero, street and field imagery, brand story, Instagram and official store links
+- shop.html, product.html, product-tee.html, product-cap.html: legacy URLs that redirect to the brand TOP, with a visible fallback link
 
-Product pages include detail views, an accessible image zoom dialog, and related items. Current product imagery is illustrative. The selected BASE account's shop URL is <https://lifeismaxbet.base.shop/>. No actual products have been decided or listed, so the brand site does not accept orders and purchase links remain disabled.
+The brand TOP does not publish a product catalog or accept orders. Its header and footer link to the official BASE store at <https://lifeismaxbet.base.shop/>. No actual products have been decided or listed.
 
 ## Assets
 
-Four images were created with the built-in image_gen tool using the official Instagram profile (https://www.instagram.com/lifeismaxbet/) as reference: an industrial waterfront campaign, a blue denim jacket, a red logo T-shirt, and a black flat-brim cap. Product mockups use gray backgrounds. The campaign model is fictional. The actual profile logo is used in the header. Each product page links to its source post; captions and product specifications were not accessible, so no price, stock, sizing or material claims are inferred. WebP versions live in assets/, with smaller card variants for product grids. The full prompt set and original requirement documents are retained locally outside Git tracking.
+The remaining editorial photo is an AI-created image based on the official Instagram profile (https://www.instagram.com/lifeismaxbet/). It is labeled as an illustration on the site. Earlier product mockups remain in assets/ for URL compatibility but are no longer displayed on the brand TOP. The full prompt set and original requirement documents are retained locally outside Git tracking.
 
 The home hero uses `assets/hero-lmb-logo.png`, a copy of the LMB logo image prepared for the BASE footer. The same image appears at desktop and mobile sizes.
 

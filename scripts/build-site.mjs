@@ -12,6 +12,7 @@ if (!['--preview', '--production'].includes(mode) || process.argv.length > 3) {
 const preview = mode === '--preview';
 const config = JSON.parse(await readFile(path.join(root, 'commerce.config.json'), 'utf8'));
 const pages = ['index.html', 'shop.html', 'product.html', 'product-tee.html', 'product-cap.html'];
+const redirectPages = new Set(['shop.html', 'product.html', 'product-tee.html', 'product-cap.html']);
 const staticFiles = ['styles.css', 'script.js', '.nojekyll'];
 const images = ['brand-logo.webp', 'campaign-ig.webp', 'hero-campaign.webp', 'hero-emblem-reference.png', 'hero-lmb-logo.png', 'jacket-ig.webp', 'jacket-ig-card.webp', 'tee-ig.webp', 'tee-ig-card.webp', 'cap-ig.webp', 'cap-ig-card.webp', 'favicon.svg'];
 const productPages = { 'product.html': 'denim-jacket', 'product-tee.html': 'logo-tee', 'product-cap.html': 'logo-cap' };
@@ -78,19 +79,17 @@ for (const [folder, allowed] of [[output, [...pages, ...staticFiles, 'assets', '
 
 for (const page of pages) {
   let html = await readFile(path.join(root, page), 'utf8');
+  if (redirectPages.has(page)) {
+    await writeFile(path.join(output, page), html, 'utf8');
+    continue;
+  }
   // Keep the brand site connected to the shop while its BASE catalog is still being prepared.
   // Product-specific purchase links remain gated by `enabled` and confirmed item URLs below.
   const shopUrl = publicUrl(config.baseShopUrl, 'baseShopUrl');
   if (shopUrl.pathname !== '/') throw new Error('baseShopUrlにはBASEショップのトップURLを指定してください。');
-  html = html.replace(/<a class="header-shop" data-base-shop href="[^"]*">[\s\S]*?<\/a>/g,
-    () => `<a class="header-shop" href="${escape(shopUrl.href)}">BASEでお気に入りを見つける <span aria-hidden="true">↗</span></a>`);
-  html = html.replace(/(<a class="hero-collection-link" data-base-shop href=")[^"]*("[^>]*>)/g,
-    (_, before, after) => `${before}${escape(shopUrl.href)}${after}`);
-  html = html.replace(/(<a class="text-link" data-base-shop href=")[^"]*("[^>]*>)/g,
+  html = html.replace(/(<a\b[^>]*\bdata-base-shop\b[^>]*\bhref=")[^"]*(")/g,
     (_, before, after) => `${before}${escape(shopUrl.href)}${after}`);
   if (live) {
-    html = html.replace(/<a class="header-shop" href="[^"]*">BASEでお気に入りを見つける <span aria-hidden="true">↗<\/span><\/a>/g,
-      () => `<a class="header-shop" href="${escape(shop.href)}">BASEでお気に入りを見つける <span aria-hidden="true">↗</span></a>`);
     html = html.replace(/<div class="announcement">[\s\S]*?<\/div>/,
       '<div class="announcement"><span>LIFE IS MAX BET</span><span>商品はBASEで販売中</span></div>');
     html = replaceRegion(html, 'store-panel', `<section class="store-panel" aria-labelledby="store-panel-title"><div><p class="eyebrow">公式オンラインストア</p><h2 id="store-panel-title">気になる一着を、オンラインで。</h2><p>販売中の商品、サイズ、価格はBASEの商品ページでご確認いただけます。</p></div><a class="button" href="${escape(shop.href)}">BASEでお気に入りを見つける <span aria-hidden="true">↗</span></a></section>`);
