@@ -16,6 +16,8 @@ Product pages include detail views, an accessible image zoom dialog, and related
 
 Four images were created with the built-in image_gen tool using the official Instagram profile (https://www.instagram.com/lifeismaxbet/) as reference: an industrial waterfront campaign, a blue denim jacket, a red logo T-shirt, and a black flat-brim cap. Product mockups use gray backgrounds. The campaign model is fictional. The actual profile logo is used in the header. Each product page links to its source post; captions and product specifications were not accessible, so no price, stock, sizing or material claims are inferred. WebP versions live in assets/, with smaller card variants for product grids. The full prompt set and original requirement documents are retained locally outside Git tracking.
 
+The home hero uses `assets/hero-lmb-logo.png`, a copy of the LMB logo image prepared for the BASE footer. The same image appears at desktop and mobile sizes.
+
 ## Editing and publishing
 
 Edit the HTML pages, styles.css and script.js directly. Product imagery can be replaced in assets/. Keep repeated navigation, footer and product cards consistent. Update the stylesheet/script version parameters when changing them.
