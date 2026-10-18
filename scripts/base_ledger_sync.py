@@ -342,7 +342,6 @@ def refresh_layout_notes(book):
     book[SHEET_PRODUCTS]["A50"] = "出典：初期値は旧台帳。BASE API取得状態はダッシュボード参照。"
     book[SHEET_PRODUCTS]["A51"] = "BASE API同期時に商品IDで合計在庫を更新。未取得行は前回値を保持。"
     book[SHEET_PRODUCTS]["A52"] = "上部単価表とBASE商品IDで連携。原価未確認の粗利・在庫原価・在庫粗利は空欄。"
-    book[SHEET_DROP]["C158"] = "単価・粗利は商品・在庫から連携。確定金額のみ使用。計画商品とBASE実商品の対応は未確認。"
     book[SHEET_DASH]["I29"] = "在庫0はAPI値。未取得行は前回値を保持。"
 
 

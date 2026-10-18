@@ -10,7 +10,7 @@ from pathlib import Path
 from openpyxl import load_workbook
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from base_ledger_sync import BaseClient, SyncError, update_workbook  # noqa: E402
+from base_ledger_sync import BaseClient, SyncError, migrate_workbook, update_workbook  # noqa: E402
 
 
 SOURCE = Path(__file__).resolve().parents[2] / "outputs/base-ledger-current.xlsx"
@@ -55,6 +55,12 @@ class FakeClient(BaseClient):
 
 
 class OfflineSyncTests(unittest.TestCase):
+    def test_existing_drop_layout_is_not_overwritten(self):
+        book = load_workbook(SOURCE)
+        book["DROP計画"]["C158"] = "利用者が配置した注記"
+        migrate_workbook(book)
+        self.assertEqual(book["DROP計画"]["C158"].value, "利用者が配置した注記")
+
     def test_stock_order_privacy_and_repeat(self):
         with tempfile.TemporaryDirectory() as temp:
             output = Path(temp) / "ledger.xlsx"
