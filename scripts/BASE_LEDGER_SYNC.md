@@ -1,21 +1,29 @@
 # BASE 読み取り台帳更新
 
-BASE API v2 の `items.read` と `orders.read` を付けた Personal Access Token（PAT）で、既存 Excel 台帳のコピーを更新します。Python 3 と `openpyxl` が必要です（`python -m pip install openpyxl`）。BASE への更新 API は呼びません。
+台帳は `DROP計画／商品・在庫／売上・利益／報酬分配／ダッシュボード` の5シートです。Python 3 と `openpyxl` が必要です（`python -m pip install openpyxl`）。BASE API v2 の PAT には `items.read` と `orders.read` だけを付けます。BASE への更新 API は呼びません。
 
-PowerShell 例（PAT は入力後のセッション内だけに保持し、ファイルへ保存しない）:
+旧台帳を5シートへ移す場合は、元ファイルを別名で保存してから、PATを使わずに次を実行します。現在の `outputs/base-ledger-current.xlsx` は移行済みです。
+
+```powershell
+python scripts/base_ledger_sync.py --migrate-only --workbook 'outputs/base-ledger-current.xlsx' --output 'outputs/base-ledger-current.xlsx'
+```
+
+次回の同期は5シート台帳を入力・出力の両方に指定します。PATは画面に表示せず、ファイルに保存しません。
 
 ```powershell
 $env:BASE_PAT = [System.Net.NetworkCredential]::new('', (Read-Host 'BASE PAT' -AsSecureString)).Password
-python scripts/base_ledger_sync.py --workbook 'outputs/inventory-20261014/販売戦略_Life_is_Max_Bet_v3.2_確定金額・EC在庫連携.xlsx' --output 'outputs/base-ledger-current.xlsx' --from-date 2026-10-01 --to-date 2026-10-15
+python scripts/base_ledger_sync.py --workbook 'outputs/base-ledger-current.xlsx' --output 'outputs/base-ledger-current.xlsx' --from-date 2026-10-01 --to-date 2026-10-15
 Remove-Item Env:BASE_PAT
 ```
 
-`--from-date` と `--to-date` は注文日（JST）の両端を含み、最大 1 年です。注文全件が必要なら、販売開始日から期間を分けて実行してください。期間ごとの注文はこの版では累積せず、指定期間の結果に置き換わります。再実行時は同じ出力ファイルを `--workbook` に指定してもよく、同期シートを置き換えて重複を避けます。元ファイルを残す運用を推奨します。
+`--from-date` と `--to-date` は注文日（JST）の両端を含み、1回の検索期間は最大1年です。取得済み注文は注文キーで統合し、明細は注文キーと明細IDで統合します。再実行しても同じ注文を二重計上しません。期間外の取得済み注文は残ります。期間内で再検索時に見つからない注文は前回値として残し、利益計算を保留します。API失敗や必須項目不備では台帳を置き換えません。
 
-③-3 の BASE ID がある行の名称・税込価格、③-4 の同 ID 行の名称・商品合計在庫だけを更新します。原価、粗利の数式、計画商品行は保ちます。台帳にない商品と全種類の在庫は `BASE商品・種類` に記録します。注文の期間内概要と明細は `BASE注文`、`BASE注文明細` に記録します。購入者氏名、連絡先、住所、注文メモ、追跡番号、API の生データは保存しません。
+`商品・在庫` の上部は計画商品とBASE実商品の単価・原価表です。55〜65行に商品合計在庫、72行以降に商品・種類IDと種類別在庫を置きます。既存商品IDでのみ単価・在庫を更新します。API一覧に無い台帳商品は古い値を保持し、`ダッシュボード` の取得状態に未取得件数を出します。APIが返した在庫0と未取得は区別します。台帳未登録の商品も種類別一覧へ残します。
 
-`BASE取得状態` に商品・注文の完了、期間内注文 0 件、台帳商品の未取得件数を分けて記録します。0 在庫は API が明示した場合のみ書き込みます。API エラー、欠けた必須項目、ページ不整合では出力ファイルを置き換えません。既存行の ID が API 一覧に無い場合は古い値を保持するため、`BASE取得状態` を確認してください。
+`売上・利益` のA:T列は注文、V:AF列は明細です。N:Q列に実送料、返金・調整、その他実費、商品原価実績を手入力します。実績0も空欄にせず `0` と入力します。R列を `確定` にすると、発送履歴があり発送済みの注文について、S列に梱包報酬控除前の利益が計算されます。原価や実送料、返金状況などが未確認の間は利益を空欄に保ちます。APIの顧客送料と実際の配送費は別の値です。
 
-注文合計、BASE 徴収手数料、顧客負担の送料は API の値です。実際の配送費、製造原価、返金、振込額はこの API 読み取りだけでは確定しません。利益や販売者報酬を確定値として算出しません。`③-4` の合計等の Excel 数式は通常の Excel で開いた時に再計算されます。
+`報酬分配` のB列は発送実績件数を表示します。梱包担当名はC列に手入力します。利益が確定した注文だけ、発送履歴ID1件につき梱包担当報酬150円をD列に計算します。確定利益から梱包報酬を控除した額が正なら森本50%・田中50%、赤字なら分配0として赤字額を別記します。未確定の注文は報酬額と分配額を空欄に保ちます。報酬ルールは同シートのL:M列に表示します。
 
-API 仕様: [商品一覧](https://apiv2.thebase.com/docs/endpoints/get-api-items/) / [注文検索](https://apiv2.thebase.com/docs/endpoints/post-api-orders-search/) / [注文取得](https://apiv2.thebase.com/docs/endpoints/get-api-orders-unique-key/)。API はベータ版のため仕様変更時は同期を止めて照合してください。
+購入者氏名、メール、住所、電話、注文メモ、追跡番号、APIの生データは保存しません。旧年間DROPの月別予定、手入力、目標値と計画の数式を5シートに移しています。Excelの数式は通常Excelで開いた時に再計算されます。APIはベータ版のため仕様変更時は同期を止めて照合してください。
+
+API仕様: [商品一覧](https://apiv2.thebase.com/docs/endpoints/get-api-items/) / [注文検索](https://apiv2.thebase.com/docs/endpoints/post-api-orders-search/) / [注文取得](https://apiv2.thebase.com/docs/endpoints/get-api-orders-unique-key/)。

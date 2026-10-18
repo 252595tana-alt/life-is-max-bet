@@ -13,7 +13,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from base_ledger_sync import BaseClient, SyncError, update_workbook  # noqa: E402
 
 
-SOURCE = Path(__file__).resolve().parents[2] / "outputs/inventory-20261014/販売戦略_Life_is_Max_Bet_v3.2_確定金額・EC在庫連携.xlsx"
+SOURCE = Path(__file__).resolve().parents[2] / "outputs/base-ledger-current.xlsx"
 
 
 class FakeClient(BaseClient):
@@ -62,21 +62,50 @@ class OfflineSyncTests(unittest.TestCase):
             items = client.items()
             orders = client.orders(date(2026, 10, 1), date(2026, 10, 15))
             update_workbook(SOURCE, output, items, orders, date(2026, 10, 1), date(2026, 10, 15))
+            interim = load_workbook(output)
+            synthetic_row = next(r for r in range(2, interim["売上・利益"].max_row + 1)
+                                 if interim["売上・利益"].cell(r, 1).value == "ABCDEFGHIJKLMNOP")
+            reward = interim["報酬分配"]
+            self.assertEqual(interim["売上・利益"].cell(synthetic_row, 13).value, 1)
+            self.assertIn(f"ISNUMBER(E{synthetic_row})", reward.cell(synthetic_row, 4).value)
+            self.assertIn(f"ISNUMBER(B{synthetic_row})", reward.cell(synthetic_row, 4).value)
+            interim["売上・利益"].cell(synthetic_row, 14, 350)
+            interim["売上・利益"].cell(synthetic_row, 15, 0)
+            interim["売上・利益"].cell(synthetic_row, 16, 0)
+            interim["売上・利益"].cell(synthetic_row, 17, 1200)
+            interim["売上・利益"].cell(synthetic_row, 18, "確定")
+            interim["報酬分配"].cell(synthetic_row, 3, "担当者A")
+            interim.save(output)
             update_workbook(output, output, items, orders, date(2026, 10, 1), date(2026, 10, 15))
             book = load_workbook(output)
-            self.assertEqual(book["③-4 EC在庫"]["D8"].value, 0)
-            self.assertEqual(book["③-4 EC在庫"]["D9"].value, 11)  # Not returned: stale, not zero.
-            self.assertEqual(book["③-3 商品単価・原価"]["E33"].value, 8800)
-            self.assertEqual(book["③-3 商品単価・原価"]["F33"].value, None)
-            self.assertEqual(book["BASE注文"].max_row, 2)
-            self.assertEqual(book["BASE注文明細"].max_row, 2)
-            self.assertEqual(book["BASE注文"]["H2"].value, 300)
-            self.assertEqual(book["BASE商品・種類"]["B2"].data_type, "s")
+            self.assertEqual(book.sheetnames, ["DROP計画", "商品・在庫", "売上・利益", "報酬分配", "ダッシュボード"])
+            self.assertEqual(book["商品・在庫"]["D55"].value, 0)
+            self.assertEqual(book["商品・在庫"]["D56"].value, 11)  # Not returned: stale, not zero.
+            self.assertEqual(book["商品・在庫"]["E33"].value, 8800)
+            self.assertEqual(book["商品・在庫"]["F33"].value, None)
+            self.assertEqual(book["ダッシュボード"]["B5"].value, 5000000)
+            self.assertEqual(book["DROP計画"]["F130"].value, 40000)
+            synthetic_row = next(r for r in range(2, book["売上・利益"].max_row + 1)
+                                 if book["売上・利益"].cell(r, 1).value == "ABCDEFGHIJKLMNOP")
+            self.assertEqual(book["売上・利益"].cell(synthetic_row, 8).value, 300)
+            self.assertEqual(book["売上・利益"].cell(synthetic_row, 14).value, 350)
+            self.assertEqual(book["売上・利益"].cell(synthetic_row, 17).value, 1200)
+            self.assertEqual(book["報酬分配"].cell(synthetic_row, 3).value, "担当者A")
+            self.assertIn(f"ISNUMBER(E{synthetic_row})", book["報酬分配"].cell(synthetic_row, 4).value)
+            self.assertEqual(book["商品・在庫"]["B72"].data_type, "s")
+            self.assertEqual(len([r for r in range(2, book["売上・利益"].max_row + 1)
+                                  if book["売上・利益"].cell(r, 1).value == "ABCDEFGHIJKLMNOP"]), 1)
             with zipfile.ZipFile(output) as file:
                 raw = b"".join(file.read(name) for name in file.namelist())
             self.assertNotIn(b"private@example.invalid", raw)
             self.assertNotIn(b"PRIVATE_PERSON", raw)
             self.assertEqual({method for method, _ in client.paths}, {"GET", "POST"})
+            update_workbook(output, output, items, {}, date(2026, 10, 1), date(2026, 10, 15))
+            stale = load_workbook(output)["売上・利益"]
+            stale_row = next(r for r in range(2, stale.max_row + 1)
+                             if stale.cell(r, 1).value == "ABCDEFGHIJKLMNOP")
+            self.assertEqual(stale.cell(stale_row, 12).value, "注文検索で未取得（前回値）")
+            self.assertEqual(stale.cell(stale_row, 14).value, 350)
 
     def test_failure_does_not_replace_output(self):
         with tempfile.TemporaryDirectory() as temp:
@@ -97,8 +126,8 @@ class OfflineSyncTests(unittest.TestCase):
             orders = client.orders(date(2026, 10, 1), date(2026, 10, 15))
             update_workbook(SOURCE, output, items, orders, date(2026, 10, 1), date(2026, 10, 15))
             book = load_workbook(output)
-            self.assertEqual(book["BASE注文"].max_row, 1)
-            self.assertEqual(book["BASE取得状態"]["B4"].value, "完了（期間内0件）")
+            self.assertEqual(book["ダッシュボード"]["I23"].value, "完了（期間内0件）")
+            self.assertEqual(book["ダッシュボード"]["I26"].value, 0)
 
 
 if __name__ == "__main__":
