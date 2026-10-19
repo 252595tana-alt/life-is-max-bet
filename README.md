@@ -50,7 +50,7 @@ node 05_運用システム・記録/scripts/build-site.mjs --preview
 node 05_運用システム・記録/scripts/build-site.mjs --production
 ```
 
-Outputs: `04_サイト公開/.publish/preview/` and `04_サイト公開/.publish/production/`. The production output remains a preview while `enabled` is false. Unknown files in an output directory cause the build to stop rather than accidentally including private data. Builds do not deploy or modify BASE.
+Outputs: `04_サイト公開/.publish/preview/` and `04_サイト公開/.publish/production/`. The preview is always `noindex` and disallowed by `robots.txt`. The production brand TOP is indexable and allows crawling independently of `enabled`; `enabled` still gates product-specific BASE links. Product cards on the TOP become plain content unless their exact URL is confirmed in `commerce.config.json` and commerce is enabled. General links to the official BASE shop remain available. Unknown files in an output directory cause the build to stop rather than accidentally including private data. Builds do not deploy or modify BASE.
 
 Production hosting uses Cloudflare Workers Static Assets. Only upload the generated `04_サイト公開/.publish/production` output; never upload the repository root. The BASE ブランドサイト navigation already points to production.
 

@@ -16,7 +16,8 @@ const redirectPages = new Set(['shop.html', 'product.html', 'product-tee.html', 
 const staticFiles = ['styles.css', 'script.js', '.nojekyll'];
 const images = ['brand-logo.webp', 'campaign-ig.webp', 'hero-campaign.webp', 'hero-emblem-reference.png', 'hero-lmb-logo.png', 'jacket-ig.webp', 'jacket-ig-card.webp', 'tee-ig.webp', 'tee-ig-card.webp', 'cap-ig.webp', 'cap-ig-card.webp', 'favicon.svg'];
 const productPages = { 'product.html': 'denim-jacket', 'product-tee.html': 'logo-tee', 'product-cap.html': 'logo-cap' };
-const live = !preview && config.enabled === true;
+const commerceLive = !preview && config.enabled === true;
+const indexable = !preview;
 const escape = value => String(value).replace(/[&<>"']/g, character => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[character]);
 
 function publicUrl(value, label) {
@@ -34,14 +35,16 @@ function publicUrl(value, label) {
 let shop;
 let brand;
 const itemUrls = new Map();
-if (live) {
-  shop = publicUrl(config.baseShopUrl, 'baseShopUrl');
-  if (shop.pathname !== '/') throw new Error('baseShopUrlにはBASEショップのトップURLを指定してください。');
+if (indexable) {
   brand = publicUrl(config.brandSiteUrl, 'brandSiteUrl');
   if (brand.hostname === 'github.io' || brand.hostname.endsWith('.github.io')) {
-    throw new Error('販売用サイトはGitHub Pages以外の公開先を設定してください。');
+    throw new Error('公開サイトはGitHub Pages以外の公開先を設定してください。');
   }
   if (!brand.pathname.endsWith('/')) brand.pathname += '/';
+}
+if (commerceLive) {
+  shop = publicUrl(config.baseShopUrl, 'baseShopUrl');
+  if (shop.pathname !== '/') throw new Error('baseShopUrlにはBASEショップのトップURLを指定してください。');
   for (const id of Object.values(productPages)) {
     const product = config.products?.[id];
     if (product?.confirmed !== true) continue;
@@ -89,7 +92,11 @@ for (const page of pages) {
   if (shopUrl.pathname !== '/') throw new Error('baseShopUrlにはBASEショップのトップURLを指定してください。');
   html = html.replace(/(<a\b[^>]*\bdata-base-shop\b[^>]*\bhref=")[^"]*(")/g,
     (_, before, after) => `${before}${escape(shopUrl.href)}${after}`);
-  if (live) {
+  // Cards become plain content until the exact URL is confirmed in the commerce config.
+  html = html.replace(/<a class="item-card" href="([^"]+)">([\s\S]*?)<\/a>/g,
+    (match, url, content) => commerceLive && [...itemUrls.values()].includes(url)
+      ? match : `<div class="item-card">${content}</div>`);
+  if (commerceLive) {
     html = html.replace(/<div class="announcement">[\s\S]*?<\/div>/,
       '<div class="announcement"><span>LIFE IS MAX BET</span><span>商品はBASEで販売中</span></div>');
     html = replaceRegion(html, 'store-panel', `<section class="store-panel" aria-labelledby="store-panel-title"><div><p class="eyebrow">公式オンラインストア</p><h2 id="store-panel-title">気になる一着を、オンラインで。</h2><p>販売中の商品、サイズ、価格はBASEの商品ページでご確認いただけます。</p></div><a class="button" href="${escape(shop.href)}">BASEでお気に入りを見つける <span aria-hidden="true">↗</span></a></section>`);
@@ -108,8 +115,10 @@ for (const page of pages) {
     }
     html = html.replaceAll('実際の商品・仕様・価格は発売前にご案内します。', '実際の商品・仕様・価格は公式オンラインストアでご確認ください。');
     html = html.replaceAll('実際の商品写真、仕様、価格は販売開始前にご案内します。', '実際の商品写真、仕様、価格は公式オンラインストアでご確認ください。');
-    const canonical = new URL(page === 'index.html' ? './' : page, brand).href;
-    const imageUrl = new URL(page === 'index.html' ? 'assets/hero-lmb-logo.png' : 'assets/campaign-ig.webp', brand).href;
+  }
+  if (indexable) {
+    const canonical = new URL('./', brand).href;
+    const imageUrl = new URL('assets/hero-lmb-logo.png', brand).href;
     html = html.replace(/<meta property="og:image" content="[^"]*">/, () => `<meta property="og:image" content="${escape(imageUrl)}">`);
     html = html.replace('</head>', `  <link rel="canonical" href="${escape(canonical)}">\n  <meta property="og:url" content="${escape(canonical)}">\n</head>`);
   } else {
@@ -119,5 +128,5 @@ for (const page of pages) {
 }
 for (const file of staticFiles) await copyFile(path.join(root, file), path.join(output, file));
 for (const file of images) await copyFile(path.join(root, 'assets', file), path.join(output, 'assets', file));
-await writeFile(path.join(output, 'robots.txt'), live ? 'User-agent: *\nAllow: /\n' : 'User-agent: *\nDisallow: /\n');
-console.log(`Output: ${output}\nBASE links: ${live ? `enabled (${itemUrls.size} confirmed products)` : 'disabled / preview'}\nBASEへの登録・デプロイ・購入は行っていません。`);
+await writeFile(path.join(output, 'robots.txt'), indexable ? 'User-agent: *\nAllow: /\n' : 'User-agent: *\nDisallow: /\n');
+console.log(`Output: ${output}\nSEO: ${indexable ? 'indexable' : 'noindex'}\nBASE product links: ${commerceLive ? `enabled (${itemUrls.size} confirmed products)` : 'disabled'}\nBASEへの登録・デプロイ・購入は行っていません。`);
