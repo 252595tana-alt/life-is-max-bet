@@ -4,10 +4,10 @@ import { fileURLToPath } from 'node:url';
 
 // Build real links into HTML so navigation also works without JavaScript.
 // Only public assets below can enter the deployment package.
-const root = fileURLToPath(new URL('../', import.meta.url));
+const root = fileURLToPath(new URL('../../04_サイト公開/', import.meta.url));
 const mode = process.argv[2] ?? '--preview';
 if (!['--preview', '--production'].includes(mode) || process.argv.length > 3) {
-  throw new Error('Usage: node scripts/build-site.mjs --preview|--production');
+  throw new Error('Usage: node 05_運用システム・記録/scripts/build-site.mjs --preview|--production');
 }
 const preview = mode === '--preview';
 const config = JSON.parse(await readFile(path.join(root, 'commerce.config.json'), 'utf8'));

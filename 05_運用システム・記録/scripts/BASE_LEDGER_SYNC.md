@@ -2,17 +2,17 @@
 
 台帳は `DROP計画／商品・在庫／売上・利益／報酬分配／ダッシュボード` の5シートです。Python 3 と `openpyxl` が必要です（`python -m pip install openpyxl`）。BASE API v2 の PAT には `items.read` と `orders.read` だけを付けます。BASE への更新 API は呼びません。
 
-旧台帳を5シートへ移す場合は、元ファイルを別名で保存してから、PATを使わずに次を実行します。現在の `【販売戦略】/販売計画/base-ledger-current.xlsx` は移行済みです。
+旧台帳を5シートへ移す場合は、元ファイルを別名で保存してから、PATを使わずに次を実行します。現在の `01_販売・運営/【販売戦略】/販売計画/base-ledger-current.xlsx` は移行済みです。
 
 ```powershell
-python scripts/base_ledger_sync.py --migrate-only --workbook '【販売戦略】/販売計画/base-ledger-current.xlsx' --output '【販売戦略】/販売計画/base-ledger-current.xlsx'
+python 05_運用システム・記録/scripts/base_ledger_sync.py --migrate-only --workbook '01_販売・運営/【販売戦略】/販売計画/base-ledger-current.xlsx' --output '01_販売・運営/【販売戦略】/販売計画/base-ledger-current.xlsx'
 ```
 
 次回の同期は5シート台帳を入力・出力の両方に指定します。PATは画面に表示せず、ファイルに保存しません。
 
 ```powershell
 $env:BASE_PAT = [System.Net.NetworkCredential]::new('', (Read-Host 'BASE PAT' -AsSecureString)).Password
-python scripts/base_ledger_sync.py --workbook '【販売戦略】/販売計画/base-ledger-current.xlsx' --output '【販売戦略】/販売計画/base-ledger-current.xlsx' --from-date 2026-10-01 --to-date 2026-10-15
+python 05_運用システム・記録/scripts/base_ledger_sync.py --workbook '01_販売・運営/【販売戦略】/販売計画/base-ledger-current.xlsx' --output '01_販売・運営/【販売戦略】/販売計画/base-ledger-current.xlsx' --from-date 2026-10-01 --to-date 2026-10-15
 Remove-Item Env:BASE_PAT
 ```
 

@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "id": 162021520,
+      "name": "Synthetic T-shirt",
+      "identifier": "TEST-TSHIRT",
+      "price": 8800,
+      "stock": 0,
+      "variations": [
+        {"id": 17, "name": "L", "identifier": "TEST-L", "stock": 0}
+      ]
+    }
+  ],
+  "orders": [
+    {
+      "unique_key": "ABCDEFGHIJKLMNOP",
+      "ordered_at": "2026-10-10T01:00:00Z",
+      "status": "ordered",
+      "amounts": {
+        "subtotal": 8800,
+        "shipping_fee": 780,
+        "cod_fee": 0,
+        "total": 9580,
+        "service_charge": {"collected_fee": 565},
+        "additional_charges": []
+      },
+      "lines": [
+        {
+          "id": 7,
+          "item_id": 162021520,
+          "variation_id": 17,
+          "title": "Synthetic T-shirt",
+          "variation": "L",
+          "price": 8800,
+          "amount": 1,
+          "total": 8800,
+          "status": "ordered",
+          "shipping_fee": 780
+        }
+      ],
+      "delivery": {"dispatched_at": null, "dispatches": []}
+    }
+  ]
+}

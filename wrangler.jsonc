@@ -4,9 +4,9 @@
   "compatibility_date": "2026-09-26",
   "workers_dev": true,
   "build": {
-    "command": "node scripts/build-site.mjs --production"
+    "command": "node 05_運用システム・記録/scripts/build-site.mjs --production"
   },
   "assets": {
-    "directory": "./.publish/production"
+    "directory": "./04_サイト公開/.publish/production"
   }
 }

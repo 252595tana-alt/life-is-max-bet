@@ -1,0 +1,50 @@
+name: BASE operations sync (manual until approved)
+
+on:
+  workflow_dispatch:
+  # Enable only after the native Sheet is chosen as source of truth, the first
+  # real-data reconciliation passes, and both secrets are configured.
+  # schedule:
+  #   - cron: '30 23 * * *' # 08:30 JST (next calendar day)
+
+permissions:
+  contents: read
+
+concurrency:
+  group: base-ops-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      BASE_PAT: ${{ secrets.BASE_PAT }}
+      GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned dependencies
+        run: python -m pip install -r 05_運用システム・記録/scripts/requirements-base-ops.txt
+      - name: Sync last 364 days (JST)
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "$BASE_PAT"
+          test -n "$GOOGLE_SERVICE_ACCOUNT_JSON"
+          END=$(TZ=Asia/Tokyo date +%F)
+          START=$(TZ=Asia/Tokyo date -d '364 days ago' +%F)
+          python 05_運用システム・記録/scripts/base_ops_sync.py --from-date "$START" --to-date "$END" \
+            --sheet-id 1bB-pnCvqC9svrwZgquCFHMqW0vJqMypM2w3pEaxcTl0 --apply
+      - name: Run summary for GitHub notifications
+        if: always()
+        shell: bash
+        run: |
+          {
+            echo '## BASE → LIMB native sync'
+            echo "- Result: ${{ job.status }}"
+            echo '- Data: BASE item/order read only; native Sheet update'
+            echo '- Buyer data and credential values are not logged.'
+          } >> "$GITHUB_STEP_SUMMARY"

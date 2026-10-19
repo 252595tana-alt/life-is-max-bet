@@ -26,11 +26,11 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Prepare public site files
-        run: node scripts/build-site.mjs --preview
+        run: node 05_運用システム・記録/scripts/build-site.mjs --preview
       - name: Upload site artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .publish/preview
+          path: 04_サイト公開/.publish/preview
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
